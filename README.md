@@ -40,7 +40,7 @@ O projeto toma como base o referencial teórico clássico de Dividir e Conquista
 * **Paradigma (D&C):**
   * **Divisão:** O vetor com as prioridades relativas é dividido recursivamente em duas metades, $L$ e $R$, no ponto médio $\lfloor n/2 \rfloor$.
   * **Conquista:** As chamadas recursivas `sortAndCount(L)` e `sortAndCount(R)` ordenam os subvetores e contam as inversões internas de cada metade.
-  * **Combinação (`mergeAndCount`):** Durante o processo de intercalação (*merge*), sempre que um elemento $R[j]$ é menor que $L[i]$, sabemos que $R[j]$ é estritamente menor que todos os elementos restantes em $L$ (de $i$ até $\vert{}L\vert{}-1$). O algoritmo soma instantaneamente $(\vert{}L\vert{} - i)$ inversões cruzadas (*split inversions*) em tempo linear $O(n)$.
+  * **Combinação (`mergeAndCount`):** Durante o processo de intercalação (*merge*), sempre que um elemento $R[j]$ é menor que $L[i]$, sabemos que $R[j]$ é estritamente menor que todos os elementos restantes em $L$ (de $i$ até $|L| - 1$). O algoritmo soma instantaneamente $(|L| - i)$ inversões cruzadas (*split inversions*) em tempo linear $O(n)$.
 * **Cálculo da Métrica de Afinidade:**
   $$\text{Inversões Máximas} = \frac{n(n-1)}{2}$$
   $$\text{Afinidade}(A, B) = \max\left(0, 100 \times \left(1 - \frac{\text{Inversões Encontradas}}{\text{Inversões Máximas}}\right)\right)\%$$
@@ -53,7 +53,7 @@ O projeto toma como base o referencial teórico clássico de Dividir e Conquista
 * **Garantia de Tempo Linear $O(m)$ no Pior Caso:**
   1. **Divisão em Blocos de 5:** Divide a coorte de $m$ estudantes em blocos de no máximo 5 elementos.
   2. **Medianas Locais:** Determina a mediana de cada bloco em tempo constante $O(1)$ utilizando Insertion Sort reduzido.
-  3. **Pivô Ótimo Recursivo:** Encontra a Mediana das Medianas invocando recursivamente o próprio QuickSelect sobre o vetor de medianas locais ($T(m/5)$).
+  3. **Pivô Ótimo Recursivo:** Encontra a Mediana das Medianas invocando recursivamente o próprio QuickSelect sobre o vetor de medianas locais (`T(m/5)`).
   4. **Particionamento em 3 Vias (Low, Equal, High):** Trata de forma determinística notas de afinidade repetidas, evitando degradação quadrática.
   5. **Passo Redutor:** O pivô ótimo garante que pelo menos $30\%$ dos elementos são estritamente menores e $30\%$ são estritamente maiores que o pivô, limitando a chamada recursiva seguinte a no máximo $7m/10$.
   $$\text{Relação de Recorrência:} \quad T(m) \le T\left(\frac{m}{5}\right) + T\left(\frac{7m}{10}\right) + O(m) \implies T(m) = O(m)$$
@@ -68,7 +68,7 @@ O projeto toma como base o referencial teórico clássico de Dividir e Conquista
 | **Mediana das Medianas + QuickSelect** | Divisão e Conquista / Redução | $\Omega(m)$ | $O(m)$ | $O(m)$ |
 | **Particionamento de Coorte** | Pipeline Integrado | $\Theta(m \cdot n \log n)$ | $O(m \cdot n \log n)$ | $O(m + n)$ |
 
-*Onde $n$ é o número de tópicos acadêmicos avaliados ($n \approx 8 \text{ a } 10$) e $m$ é a quantidade de alunos na turma ($m \ge 15$).*
+Onde $n$ é o número de tópicos acadêmicos avaliados ($n \approx 8 \text{ a } 10$) e $m$ é a quantidade de alunos na turma ($m \ge 15$).
 
 ---
 
