@@ -1,6 +1,7 @@
 import React from 'react';
 import PreferenceRanker from './components/PreferenceRanker';
 import CohortAnalysis from './components/CohortAnalysis';
+import RecursionTree from './components/RecursionTree';
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
       <main className="max-w-6xl mx-auto space-y-8">
         <PreferenceRanker />
         <CohortAnalysis />
+        <RecursionTree />
       </main>
     </div>
   );
