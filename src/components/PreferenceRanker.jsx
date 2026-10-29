@@ -1,11 +1,9 @@
-import React, { useState, useMemo } from 'react';
-import { canonicalTopics, defaultUserPreferences, simulatedStudents } from '../utils/studentData';
+import React, { useMemo } from 'react';
+import { canonicalTopics, simulatedStudents } from '../utils/studentData';
 import { calculatePeerAffinity } from '../utils/divideAndConquer';
 
-export default function PreferenceRanker() {
-  const [userRanking, setUserRanking] = useState(defaultUserPreferences);
-  const [selectedStudentId, setSelectedStudentId] = useState(simulatedStudents[0].matricula);
-
+export default function PreferenceRanker({ userRanking, setUserRanking, selectedStudentId, setSelectedStudentId }) {
+  
   const selectedStudent = useMemo(() => {
     return simulatedStudents.find(s => s.matricula === selectedStudentId);
   }, [selectedStudentId]);

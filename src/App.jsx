@@ -1,9 +1,13 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { defaultUserPreferences, simulatedStudents } from './utils/studentData';
 import PreferenceRanker from './components/PreferenceRanker';
 import CohortAnalysis from './components/CohortAnalysis';
 import RecursionTree from './components/RecursionTree';
 
 function App() {
+  const [userRanking, setUserRanking] = useState(defaultUserPreferences);
+  const [selectedStudentId, setSelectedStudentId] = useState(simulatedStudents[0].matricula);
+
   return (
     <div className="min-h-screen bg-slate-100 p-4 md:p-8 font-sans text-slate-800">
       <header className="max-w-6xl mx-auto mb-8 text-center">
@@ -16,9 +20,20 @@ function App() {
       </header>
 
       <main className="max-w-6xl mx-auto space-y-8">
-        <PreferenceRanker />
-        <CohortAnalysis />
-        <RecursionTree />
+        <PreferenceRanker 
+          userRanking={userRanking} 
+          setUserRanking={setUserRanking}
+          selectedStudentId={selectedStudentId}
+          setSelectedStudentId={setSelectedStudentId}
+        />
+        <CohortAnalysis 
+          userRanking={userRanking} 
+        />
+        <RecursionTree 
+          userRanking={userRanking}
+          selectedStudentId={selectedStudentId}
+          setSelectedStudentId={setSelectedStudentId}
+        />
       </main>
     </div>
   );

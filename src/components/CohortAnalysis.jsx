@@ -1,13 +1,13 @@
 import React, { useMemo, useState } from 'react';
-import { defaultUserPreferences, simulatedStudents } from '../utils/studentData';
+import { simulatedStudents } from '../utils/studentData';
 import { analyzeCohortAffinity } from '../utils/divideAndConquer';
 
-export default function CohortAnalysis() {
+export default function CohortAnalysis({ userRanking }) {
   const [showTrace, setShowTrace] = useState(false);
 
   const analysis = useMemo(() => {
-    return analyzeCohortAffinity(defaultUserPreferences, simulatedStudents);
-  }, []);
+    return analyzeCohortAffinity(userRanking, simulatedStudents);
+  }, [userRanking]);
 
   if (!analysis) return null;
 
