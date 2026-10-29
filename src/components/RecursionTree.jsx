@@ -1,5 +1,5 @@
 import React, { useState, useMemo } from 'react';
-import { defaultUserPreferences, simulatedStudents, canonicalTopics } from '../utils/studentData';
+import { defaultUserPreferences, simulatedStudents } from '../utils/studentData';
 import { calculatePeerAffinity } from '../utils/divideAndConquer';
 
 // Componente auxiliar para desenhar os vetores como blocos de números
