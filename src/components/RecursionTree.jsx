@@ -138,7 +138,8 @@ export default function RecursionTree() {
                       
                       <div className="mt-3 bg-white rounded border border-rose-100 p-2 shadow-sm">
                         <div className="text-xs font-bold text-slate-700">
-                          <span className="text-rose-500 text-base">{node.totalSubtreeInversions}</span> inversões encontradas
+                          <span className="text-rose-500 text-base">{node.totalSubtreeInversions}</span>{' '}
+                          {node.totalSubtreeInversions === 1 ? 'inversão encontrada' : 'inversões encontradas'}
                         </div>
                         <div className="text-[10px] text-slate-500 mt-1 font-mono">
                           (Esq: {node.leftInversions} | Dir: {node.rightInversions} | Cruzadas: {node.splitInversions})

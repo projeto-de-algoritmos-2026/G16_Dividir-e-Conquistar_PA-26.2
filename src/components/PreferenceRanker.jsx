@@ -39,7 +39,9 @@ export default function PreferenceRanker() {
 
         <div className="flex gap-4">
           <div className="bg-white px-4 py-2 rounded-lg border border-slate-200 shadow-sm text-center">
-            <div className="text-xs font-semibold text-slate-500 uppercase tracking-wider">Inversões</div>
+            <div className="text-xs font-semibold text-slate-500 uppercase tracking-wider">
+              {analysis.inversions === 1 ? 'Inversão' : 'Inversões'}
+            </div>
             <div className="text-xl font-bold text-slate-800">{analysis.inversions} <span className="text-sm text-slate-400 font-normal">/ {analysis.maxInversions}</span></div>
           </div>
           <div className="bg-blue-50 px-4 py-2 rounded-lg border border-blue-100 shadow-sm text-center">
