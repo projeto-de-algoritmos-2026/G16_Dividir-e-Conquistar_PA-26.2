@@ -10,7 +10,6 @@ export default function PreferenceRanker() {
     return simulatedStudents.find(s => s.matricula === selectedStudentId);
   }, [selectedStudentId]);
 
-  // Função para mover disciplinas no ranking do usuário
   const moveItem = (index, direction) => {
     if ((direction === -1 && index === 0) || (direction === 1 && index === userRanking.length - 1)) return;
     const newRanking = [...userRanking];
@@ -22,7 +21,6 @@ export default function PreferenceRanker() {
 
   const analysis = useMemo(() => {
     if (!selectedStudent) return null;
-    // O algoritmo já devolve { inversions, affinityPercentage, lineMappings, recursionTrace }
     return calculatePeerAffinity(userRanking, selectedStudent.preferences);
   }, [userRanking, selectedStudent]);
 
@@ -36,7 +34,7 @@ export default function PreferenceRanker() {
       <div className="bg-slate-50 border-b border-gray-200 p-6 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
         <div>
           <h2 className="text-xl font-bold text-slate-800">Comparador de Afinidade (1 vs 1)</h2>
-          <p className="text-sm text-slate-600 mt-1">Ordene suas preferências e visualize a distância de Kendall Tau calculada em O(n log n).</p>
+          <p className="text-sm text-slate-600 mt-1">Ordene suas preferências e visualize a distância de Kendall Tau calculada em $O(n \log n)$.</p>
         </div>
 
         <div className="flex gap-4">
@@ -79,24 +77,36 @@ export default function PreferenceRanker() {
               const topic = getTopicData(topicId);
               return (
                 <div key={`user-${topicId}`} className="h-16 bg-white border border-slate-200 shadow-sm rounded-lg p-3 flex items-center justify-between transition-all hover:border-blue-300">
-                  <div className="flex-1 truncate">
-                    <div className="text-xs font-bold text-slate-400">{index + 1}º Opção</div>
-                    <div className="text-sm font-semibold text-slate-800 truncate" title={topic.name}>{topic.code}</div>
+                  <div className="flex-1 min-w-0 pr-2">
+                    <div className="flex items-center gap-2">
+                      <span className="text-[11px] font-bold text-blue-600 bg-blue-50 px-1.5 py-0.5 rounded border border-blue-100 font-mono">
+                        {topic.id}
+                      </span>
+                      <span className="text-[11px] font-semibold text-slate-400">
+                        {index + 1}º
+                      </span>
+                      <span className="text-[10px] text-slate-400 font-mono">
+                        ({topic.code})
+                      </span>
+                    </div>
+                    <div className="text-xs font-semibold text-slate-800 truncate mt-0.5" title={topic.name}>
+                      {topic.name}
+                    </div>
                   </div>
-                  <div className="flex flex-col gap-1 ml-2">
+                  <div className="flex flex-col gap-1 ml-1 flex-shrink-0">
                     <button 
                       onClick={() => moveItem(index, -1)}
                       disabled={index === 0}
-                      className="p-1 text-slate-400 hover:text-blue-600 hover:bg-blue-50 rounded disabled:opacity-30 disabled:hover:bg-transparent disabled:hover:text-slate-400"
+                      className="p-1 text-slate-400 hover:text-blue-600 hover:bg-blue-50 rounded disabled:opacity-30 disabled:hover:bg-transparent disabled:hover:text-slate-400 cursor-pointer"
                     >
-                      <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 15l7-7 7 7"></path></svg>
+                      <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 15l7-7 7 7"></path></svg>
                     </button>
                     <button 
                       onClick={() => moveItem(index, 1)}
                       disabled={index === userRanking.length - 1}
-                      className="p-1 text-slate-400 hover:text-blue-600 hover:bg-blue-50 rounded disabled:opacity-30 disabled:hover:bg-transparent disabled:hover:text-slate-400"
+                      className="p-1 text-slate-400 hover:text-blue-600 hover:bg-blue-50 rounded disabled:opacity-30 disabled:hover:bg-transparent disabled:hover:text-slate-400 cursor-pointer"
                     >
-                      <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"></path></svg>
+                      <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"></path></svg>
                     </button>
                   </div>
                 </div>
@@ -133,10 +143,22 @@ export default function PreferenceRanker() {
             {selectedStudent && selectedStudent.preferences.map((topicId, index) => {
               const topic = getTopicData(topicId);
               return (
-                <div key={`student-${topicId}`} className="h-16 bg-slate-50 border border-slate-200 rounded-lg p-3 flex items-center justify-between opacity-90">
-                  <div className="flex-1 truncate text-right">
-                    <div className="text-xs font-bold text-slate-400">{index + 1}º Opção</div>
-                    <div className="text-sm font-semibold text-slate-700 truncate" title={topic.name}>{topic.code}</div>
+                <div key={`student-${topicId}`} className="h-16 bg-slate-50 border border-slate-200 rounded-lg p-3 flex items-center justify-between opacity-95">
+                  <div className="flex-1 min-w-0 text-right pl-2">
+                    <div className="flex items-center justify-end gap-2">
+                      <span className="text-[10px] text-slate-400 font-mono">
+                        ({topic.code})
+                      </span>
+                      <span className="text-[11px] font-semibold text-slate-400">
+                        {index + 1}º
+                      </span>
+                      <span className="text-[11px] font-bold text-slate-700 bg-slate-200/60 px-1.5 py-0.5 rounded font-mono">
+                        {topic.id}
+                      </span>
+                    </div>
+                    <div className="text-xs font-semibold text-slate-700 truncate mt-0.5" title={topic.name}>
+                      {topic.name}
+                    </div>
                   </div>
                 </div>
               );
