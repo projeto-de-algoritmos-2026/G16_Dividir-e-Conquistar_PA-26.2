@@ -34,7 +34,7 @@ export default function PreferenceRanker() {
       <div className="bg-slate-50 border-b border-gray-200 p-6 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
         <div>
           <h2 className="text-xl font-bold text-slate-800">Comparador de Afinidade (1 vs 1)</h2>
-          <p className="text-sm text-slate-600 mt-1">Ordene suas preferências e visualize a distância de Kendall Tau calculada em $O(n \log n)$.</p>
+          <p className="text-sm text-slate-600 mt-1">Ordene suas preferências e visualize a distância de Kendall Tau calculada em O(n log n).</p>
         </div>
 
         <div className="flex gap-4">
