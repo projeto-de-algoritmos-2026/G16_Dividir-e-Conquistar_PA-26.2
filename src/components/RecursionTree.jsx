@@ -59,7 +59,7 @@ export default function RecursionTree({ userRanking, selectedStudentId, setSelec
         <div>
           <h2 className="text-xl font-bold text-slate-800">Inspetor da Árvore de Recursão (MergeSort)</h2>
           <p className="text-sm text-slate-600 mt-1">
-            Rastreio visual de <strong>Divisão e Conquista $O(n \log n)$</strong>. Os números representam o índice canónico da disciplina.
+            Rastreio visual de <strong>Divisão e Conquista O(n log n)</strong>. Os números representam o índice canónico da disciplina.
           </p>
         </div>
 
