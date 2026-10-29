@@ -4,7 +4,7 @@
 **Módulo:** 3 - Dividir e Conquistar (*Divide and Conquer*)  
 **Professor:** Maurício Serrano  
 
-Aplicação web desenvolvida em **React + Vite** projetada para auxiliar na formação técnica de duplas e grupos de trabalho na Universidade de Brasília (UnB). O sistema avalia a compatibilidade de preferências entre estudantes através da distância de *Kendall Tau*, calculada por meio da **Contagem de Inversões** ($O(n \log n)$), e utiliza o algoritmo da **Mediana das Medianas (BFPRT)** com **QuickSelect** ($O(n)$ determinístico) para particionar turmas em coortes equilibradas de afinidade.
+Aplicação web desenvolvida em **React + Vite** projetada para auxiliar na formação técnica de duplas e grupos de trabalho na Universidade de Brasília (UnB). O sistema avalia a compatibilidade de preferências entre estudantes através da distância de *Kendall Tau*, calculada por meio da **Contagem de Inversões** (`O(n log n)`), e utiliza o algoritmo da **Mediana das Medianas (BFPRT)** com **QuickSelect** (`O(n)` determinístico) para particionar turmas em coortes equilibradas de afinidade.
 
 ---
 
@@ -49,7 +49,7 @@ O projeto toma como base o referencial teórico clássico de Dividir e Conquista
 ---
 
 ### 2. Mediana das Medianas (BFPRT) & QuickSelect
-* **Objetivo:** Encontrar a nota de corte exata (mediana) da turma para dividir os alunos entre *Grupo Recomendado* (alta afinidade) e *Grupo Divergente* sem incorrer no custo de ordenação de todos os estudantes ($O(m \log m)$).
+* **Objetivo:** Encontrar a nota de corte exata (mediana) da turma para dividir os alunos entre *Grupo Recomendado* (alta afinidade) e *Grupo Divergente* sem incorrer no custo de ordenação de todos os estudantes (`O(m log m)`).
 * **Garantia de Tempo Linear $O(m)$ no Pior Caso:**
   1. **Divisão em Blocos de 5:** Divide a coorte de $m$ estudantes em blocos de no máximo 5 elementos.
   2. **Medianas Locais:** Determina a mediana de cada bloco em tempo constante $O(1)$ utilizando Insertion Sort reduzido.
