@@ -1,5 +1,6 @@
 import React from 'react';
 import PreferenceRanker from './components/PreferenceRanker';
+import CohortAnalysis from './components/CohortAnalysis';
 
 function App() {
   return (
@@ -14,8 +15,8 @@ function App() {
       </header>
 
       <main className="max-w-6xl mx-auto space-y-8">
-        {/* O seu novo componente é renderizado aqui */}
         <PreferenceRanker />
+        <CohortAnalysis />
       </main>
     </div>
   );

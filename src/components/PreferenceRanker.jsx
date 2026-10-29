@@ -1,7 +1,6 @@
 import React, { useState, useMemo } from 'react';
 import { canonicalTopics, defaultUserPreferences, simulatedStudents } from '../utils/studentData';
-
-const MAX_INVERSIONS = 28; // Para n=8: (8 * 7) / 2
+import { calculatePeerAffinity } from '../utils/divideAndConquer';
 
 export default function PreferenceRanker() {
   const [userRanking, setUserRanking] = useState(defaultUserPreferences);
@@ -21,42 +20,15 @@ export default function PreferenceRanker() {
     setUserRanking(newRanking);
   };
 
-  // Calcula mapeamento de linhas e inversões (Mock do algoritmo de Kendall Tau)
   const analysis = useMemo(() => {
-    if (!selectedStudent) return { inversions: 0, affinity: 100, mappings: [] };
-
-    let inversions = 0;
-    const mappings = [];
-    const studentPrefs = selectedStudent.preferences;
-
-    // Calcula linhas e conta inversões (O(n^2) simples para renderização)
-    for (let i = 0; i < userRanking.length; i++) {
-      const topicId = userRanking[i];
-      const targetIndex = studentPrefs.indexOf(topicId);
-      
-      mappings.push({
-        id: topicId,
-        fromIndex: i,
-        toIndex: targetIndex,
-        // Cor baseada no índice para facilitar o rastreio visual
-        color: `hsl(${i * 45}, 70%, 50%)` 
-      });
-
-      for (let j = i + 1; j < userRanking.length; j++) {
-        const nextTopicId = userRanking[j];
-        if (studentPrefs.indexOf(topicId) > studentPrefs.indexOf(nextTopicId)) {
-          inversions++;
-        }
-      }
-    }
-
-    const affinity = Math.max(0, 100 - ((inversions / MAX_INVERSIONS) * 100)).toFixed(1);
-
-    return { inversions, affinity, mappings };
+    if (!selectedStudent) return null;
+    // O algoritmo já devolve { inversions, affinityPercentage, lineMappings, recursionTrace }
+    return calculatePeerAffinity(userRanking, selectedStudent.preferences);
   }, [userRanking, selectedStudent]);
 
-  // Helper para buscar os dados completos da disciplina
   const getTopicData = (id) => canonicalTopics.find(t => t.id === id);
+
+  if (!analysis) return null;
 
   return (
     <div className="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
@@ -64,17 +36,17 @@ export default function PreferenceRanker() {
       <div className="bg-slate-50 border-b border-gray-200 p-6 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
         <div>
           <h2 className="text-xl font-bold text-slate-800">Comparador de Afinidade (1 vs 1)</h2>
-          <p className="text-sm text-slate-600 mt-1">Ordene suas preferências e visualize a distância de Kendall Tau.</p>
+          <p className="text-sm text-slate-600 mt-1">Ordene suas preferências e visualize a distância de Kendall Tau calculada em $O(n \log n)$.</p>
         </div>
 
         <div className="flex gap-4">
           <div className="bg-white px-4 py-2 rounded-lg border border-slate-200 shadow-sm text-center">
             <div className="text-xs font-semibold text-slate-500 uppercase tracking-wider">Inversões</div>
-            <div className="text-xl font-bold text-slate-800">{analysis.inversions} <span className="text-sm text-slate-400 font-normal">/ 28</span></div>
+            <div className="text-xl font-bold text-slate-800">{analysis.inversions} <span className="text-sm text-slate-400 font-normal">/ {analysis.maxInversions}</span></div>
           </div>
           <div className="bg-blue-50 px-4 py-2 rounded-lg border border-blue-100 shadow-sm text-center">
             <div className="text-xs font-semibold text-blue-600 uppercase tracking-wider">Afinidade</div>
-            <div className="text-xl font-bold text-blue-900">{analysis.affinity}%</div>
+            <div className="text-xl font-bold text-blue-900">{analysis.affinityPercentage}%</div>
           </div>
         </div>
       </div>
@@ -133,20 +105,19 @@ export default function PreferenceRanker() {
           </div>
 
           {/* Área Central: SVG das Linhas de Inversão */}
-          <div className="w-24 md:w-48 relative h-[608px]"> {/* 8 items * (64px height + 12px gap) - 12px = 596px ~ 608px para folga */}
+          <div className="w-24 md:w-48 relative h-[608px]">
             <svg className="absolute inset-0 w-full h-full pointer-events-none">
-              {analysis.mappings.map(mapping => {
-                // Cálculo de coordenadas Y baseado na altura fixa do card (64px) + gap (12px)
-                // Centro do card = índice * 76 + 32
+              {analysis.lineMappings.map(mapping => {
                 const y1 = mapping.fromIndex * 76 + 32;
                 const y2 = mapping.toIndex * 76 + 32;
+                const color = `hsl(${mapping.fromIndex * 45}, 70%, 50%)`;
                 
                 return (
                   <path
-                    key={`line-${mapping.id}`}
+                    key={`line-${mapping.topicId}`}
                     d={`M 0 ${y1} C 50 ${y1}, 50 ${y2}, 100 ${y2}`}
                     fill="none"
-                    stroke={mapping.color}
+                    stroke={color}
                     strokeWidth="3"
                     className="opacity-60 drop-shadow-sm transition-all duration-500 ease-in-out"
                     vectorEffect="non-scaling-stroke"
