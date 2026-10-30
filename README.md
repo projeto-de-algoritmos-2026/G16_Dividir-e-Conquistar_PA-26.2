@@ -12,7 +12,7 @@ Aplicação web desenvolvida em **React + Vite** projetada para auxiliar na form
 
 | Foto | Matrícula | Integrante | Responsabilidade Principal |
 | :---: | :---: | :--- | :--- |
-| <img src="https://github.com/rodrigohenriquedonato.png" width="48" height="48" style="border-radius: 50%" alt="Rodrigo Henrique"/><br>[Rodrigo Donato](https://github.com/rodrigohenriquedonato) | `241012374` | Rodrigo Henrique Donato de Souza | **Membro B:** Lógica algorítmica (`src/utils/divideAndConquer.js`), implementação da Contagem de Inversões e rastreio da árvore de recursão, algoritmo linear da Mediana das Medianas, particionamento em 3 vias e suite de testes automatizados (`test-algorithms.js`). |
+| <img src="https://github.com/Fofodoido.png" width="48" height="48" style="border-radius: 50%" alt="Rodrigo Henrique"/><br>[Rodrigo Donato](https://github.com/rodrigohenriquedonato) | `241012374` | Rodrigo Henrique Donato de Souza | **Membro B:** Lógica algorítmica (`src/utils/divideAndConquer.js`), implementação da Contagem de Inversões e rastreio da árvore de recursão, algoritmo linear da Mediana das Medianas, particionamento em 3 vias e suite de testes automatizados (`test-algorithms.js`). |
 | <img src="https://github.com/Daniellira540.png" width="48" height="48" style="border-radius: 50%" alt="Daniel de Oliveira"/><br>[Daniel Lira](https://github.com/Daniellira540) | `241025505` | Daniel de Oliveira Lira | **Membro A:** Modelagem do catálogo acadêmico e estudantes da UnB (`src/utils/studentData.js`), interface reativa em Tailwind CSS, visualizador de conexões (linhas cruzadas em SVG) e árvore interativa de recursão. |
 
 ---
