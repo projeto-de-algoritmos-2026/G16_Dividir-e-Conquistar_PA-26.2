@@ -19,15 +19,15 @@ Aplicação web desenvolvida em **React + Vite** projetada para auxiliar na form
 
 ## 🎥 Apresentação em Vídeo
 
-> 🔗 **Link do Vídeo:** [Clique aqui para assistir à apresentação no YouTube](COLE_O_LINK_DO_SEU_VIDEO_AQUI)
+> 🔗 **Link do Vídeo:** [Clique aqui para assistir à apresentação no YouTube](https://youtu.be/vgfB3db-Vjs)
 
 * **Duração:** ~4 a 5 minutos
 * **Tópicos abordados:**
   1. Contextualização do problema de formação de equipes acadêmicas na UnB.
-  2. Demonstração prática do comparador 1 vs 1 e das linhas de inversão renderizadas em SVG.
-  3. Explicação detalhada do código do `sortAndCount` e da intercalação `mergeAndCount`.
-  4. Demonstração da Mediana das Medianas em ação para particionamento de turmas em tempo linear determinístico $O(n)$.
-  5. Execução da suite de testes automatizados comprovando a robustez dos casos de borda.
+  2. Demonstração prática do comparador 1 vs 1 com recálculo instantâneo de inversões e linhas SVG.
+  3. Visualização interativa da árvore de recursão do MergeSort ($O(n \log n)$) e cálculo das split inversions por nível.
+  4. Demonstração e prova teórica da Mediana das Medianas (BFPRT) em tempo linear determinístico $O(n)$ para particionamento da coorte.
+  5. Validação dos casos de borda e extremos diretamente pela interface da aplicação.
 
 ---
 
